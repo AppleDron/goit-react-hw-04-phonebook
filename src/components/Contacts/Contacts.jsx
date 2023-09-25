@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   ContactList,
   Contactitem,
@@ -7,28 +7,28 @@ import {
 } from './Contacts.styled';
 import { AiFillDelete } from 'react-icons/ai';
 
-export default class Contacts extends Component {
-  render() {
-    return (
-      <div>
-        <TitleContacts>Contacts</TitleContacts>
-        {this.props.children}
-        <ContactList>
-          {this.props.contacts.map(contact => (
-            <Contactitem key={contact.id}>
-              <p>
-                {contact.name}: <span>{contact.number}</span>
-              </p>
-              <DeleteButton
-                type="button"
-                onClick={() => this.props.deleteContact(contact.id)}
-              >
-                <AiFillDelete />
-              </DeleteButton>
-            </Contactitem>
-          ))}
-        </ContactList>
-      </div>
-    );
-  }
-}
+const Contacts = ({ children, contacts, deleteContact }) => {
+  return (
+    <div>
+      <TitleContacts>Contacts</TitleContacts>
+      {children}
+      <ContactList>
+        {contacts.map(contact => (
+          <Contactitem key={contact.id}>
+            <p>
+              {contact.name}: <span>{contact.number}</span>
+            </p>
+            <DeleteButton
+              type="button"
+              onClick={() => deleteContact(contact.id)}
+            >
+              <AiFillDelete />
+            </DeleteButton>
+          </Contactitem>
+        ))}
+      </ContactList>
+    </div>
+  );
+};
+
+export default Contacts;
